@@ -1,0 +1,42 @@
+# SPDX-License-Identifier: GPL-3.0-or-later
+
+# cargo-deny configuration for Flux
+# https://embarkstudios.github.io/cargo-deny/checks/licenses/cfg.html
+
+[licenses]
+version = 2
+
+# Allow these OSI/FSF-approved licenses for all dependencies.
+allow = [
+    "Apache-2.0",
+    "BSD-2-Clause",
+    "BSD-3-Clause",
+    "GPL-3.0",
+    "GPL-3.0-or-later",
+    "ISC",
+    "MIT",
+    "MPL-2.0",
+    "Unicode-3.0",
+    "Unlicense",
+    "Zlib",
+]
+
+# Clarify licenses for crates that use non-standard expressions.
+[[licenses.clarify]]
+name = "ring"
+version = "*"
+expression = "MIT AND ISC AND OpenSSL"
+license-files = [{ path = "LICENSE", hash = 0xbd0eed23 }]
+
+[advisories]
+version = 2
+
+# Ignore warnings for dependencies we cannot easily replace.
+ignore = [
+    # paste is unmaintained but is a transitive dependency of ratatui.
+    # Tracked: RUSTSEC-2024-0436
+    "RUSTSEC-2024-0436",
+    # lru 0.12.5 has an unsoundness warning via ratatui.
+    # Tracked: RUSTSEC-2026-0002
+    "RUSTSEC-2026-0002",
+]

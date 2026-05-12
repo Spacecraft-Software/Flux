@@ -1,0 +1,13 @@
+[build]
+rustflags = [
+    "-C", "target-cpu=native",
+    # Hardening: full RELRO + BIND_NOW (GOT/PLT protection)
+    "-C", "link-arg=-Wl,-z,relro,-z,now",
+    # Hardening: non-executable stack
+    "-C", "link-arg=-Wl,-z,noexecstack",
+]
+
+[profile.release]
+opt-level = 3
+lto = true
+codegen-units = 1

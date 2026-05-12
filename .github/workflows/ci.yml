@@ -1,0 +1,57 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  CARGO_TERM_COLOR: always
+
+jobs:
+  build-and-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-action@stable
+        with:
+          toolchain: stable
+
+      - name: Cache cargo
+        uses: Swatinem/rust-cache@v2
+
+      - name: Build
+        run: cargo build --workspace --release
+
+      - name: Test
+        run: cargo test --workspace
+
+      - name: Clippy
+        run: cargo clippy --workspace --all-targets -- -D warnings
+
+      - name: Format check
+        run: cargo fmt --all --check
+
+      - name: SPDX header lint
+        run: |
+          MISSING=$(find src tests -name '*.rs' ! -exec grep -q 'SPDX-License-Identifier' {} \; -print)
+          if [ -n "$MISSING" ]; then
+            echo "Missing SPDX headers in:"
+            echo "$MISSING"
+            exit 1
+          fi
+
+      - name: Install cargo-audit
+        run: cargo install cargo-audit
+
+      - name: Audit
+        run: cargo audit
+
+      - name: Install cargo-deny
+        run: cargo install cargo-deny
+
+      - name: License check
+        run: cargo deny check licenses
