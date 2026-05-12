@@ -1,0 +1,45 @@
+# Maintainer: Mohamed Hammad <Mohamed.Hammad@Steelbore.com>
+pkgname=flux-dns
+pkgver=0.1.0
+pkgrel=1
+pkgdesc="DNS selector and network configurator CLI for Linux and BSD"
+arch=('x86_64' 'aarch64')
+url="https://Flux.Steelbore.com/"
+license=('GPL-3.0-or-later')
+depends=('glibc')
+makedepends=('rust' 'cargo')
+optdepends=(
+  'unbound: DoQ support via stub resolver'
+  'dnscrypt-proxy: DNSCrypt support via stub resolver'
+  'systemd-resolved: systemd-resolved backend'
+  'networkmanager: NetworkManager backend'
+  'warp-cli: Cloudflare WARP VPN support'
+  'adguardvpn-cli: AdGuard VPN support'
+)
+source=("$pkgname-$pkgver.tar.gz::https://github.com/steelbore/flux/archive/v$pkgver.tar.gz")
+sha256sums=('SKIP')
+
+prepare() {
+  cd "$srcdir/flux-$pkgver"
+  export CARGO_HOME="$srcdir/cargo"
+  cargo fetch --locked --target "$(rustc -vV | sed -n 's|host: ||p')"
+}
+
+build() {
+  cd "$srcdir/flux-$pkgver"
+  export CARGO_HOME="$srcdir/cargo"
+  cargo build --release --frozen
+}
+
+check() {
+  cd "$srcdir/flux-$pkgver"
+  export CARGO_HOME="$srcdir/cargo"
+  cargo test --workspace --frozen
+}
+
+package() {
+  cd "$srcdir/flux-$pkgver"
+  install -Dm755 "target/release/dns" "$pkgdir/usr/bin/dns"
+  install -Dm644 "man/dns.1" "$pkgdir/usr/share/man/man1/dns.1"
+  install -Dm644 "LICENSE" "$pkgdir/usr/share/licenses/$pkgname/LICENSE"
+}

@@ -1,0 +1,302 @@
+.\" SPDX-License-Identifier: GPL-3.0-or-later
+.TH DNS 1 "2026-05-12" "v0.1.0" "Flux Manual"
+.SH NAME
+dns \- DNS selector and network configurator
+.SH SYNOPSIS
+.B dns
+.RI [ OPTIONS ]
+.RI [ COMMAND ]
+.SH DESCRIPTION
+.B dns
+is a DNS selector and network configurator CLI for Linux and BSD.
+It detects the active DNS/NTP subsystem, applies encrypted DNS
+(DoT/DoH/DoQ/DNSCrypt), optionally configures NTP, and orchestrates
+VPN clients (Cloudflare WARP, AdGuard VPN CLI).
+.PP
+When run without a command in an interactive terminal, an optional
+TUI interface is launched for interactive provider/protocol selection.
+.SH OPTIONS
+.TP
+.BR \-\-format " " \fIFORMAT\fR
+Set output format. Supported values:
+.BR json ", " jsonl ", " yaml ", " csv ", " human ", " explore .
+Default is inferred from environment (TTY \-> human, non-TTY or agent env \-> json).
+.TP
+.BR \-\-json
+Shorthand for
+.BR \-\-format=json .
+.TP
+.BR \-\-no\-color
+Disable colored output.
+.TP
+.BR \-\-color " " \fIWHEN\fR
+Color mode: "auto", "always", or "never".
+.TP
+.BR \-\-dry\-run
+Simulate the operation without making changes.
+.TP
+.BR \-\-verbose
+Enable verbose logging.
+.TP
+.BR \-\-quiet
+Suppress non-essential output.
+.TP
+.BR \-y ", " \-\-yes ", " \-\-force
+Skip confirmation prompts.
+.TP
+.BR \-\-fields " " \fIFIELDS\fR
+Comma-separated list of JSON fields to emit. Useful for agent consumers.
+.TP
+.BR \-\-absolute\-time
+Use absolute timestamps in output.
+.TP
+.BR \-\-print0
+Separate records with NUL characters.
+.TP
+.BR \-h ", " \-\-help
+Print help information.
+.TP
+.BR \-V ", " \-\-version
+Print version information.
+.SH COMMANDS
+.SS "apply"
+Apply DNS configuration for a provider and protocol.
+.PP
+.B dns apply
+.RI [ OPTIONS ]
+.RI <provider>
+.RI [ <tier> ]
+.RI <protocol>
+.PP
+Options:
+.TP
+.BR \-p ", " \-\-provider " " \fIPROVIDER\fR
+Provider slug (e.g. "cloudflare", "google", "adguard").
+.TP
+.BR \-t ", " \-\-tier " " \fITIER\fR
+Tier name (e.g. "standard", "family", "malware").
+.TP
+.BR \-P ", " \-\-protocol " " \fIPROTOCOL\fR
+Protocol: "plain", "dot", "doh", "doq", "dnscrypt", "warp".
+.TP
+.BR \-\-ipv4\-only
+Use IPv4 only.
+.TP
+.BR \-\-ipv6\-only
+Use IPv6 only.
+.TP
+.BR \-\-no\-backup
+Skip backup before applying.
+.TP
+.BR \-\-no\-verify
+Skip post-apply verification.
+.TP
+.BR \-\-ntp
+Also configure NTP for the provider.
+.TP
+.BR \-\-vpn " " \fIVPN\fR
+Also connect to the specified VPN provider ("warp" or "adguard").
+.SS "status"
+Show current DNS and VPN status.
+.PP
+.B dns status
+.RI [ OPTIONS ]
+.SS "list"
+List providers, tiers, protocols, or VPN clients.
+.PP
+.B dns list
+.RI [ OPTIONS ]
+.PP
+Options:
+.TP
+.BR \-\-providers
+List all providers.
+.TP
+.BR \-\-tiers
+List tiers for a provider.
+.TP
+.BR \-\-protocols
+List valid protocols for a provider and tier.
+.TP
+.BR \-\-vpn
+List available VPN clients.
+.TP
+.BR \-\-provider " " \fIPROVIDER\fR
+Provider slug (used with --tiers and --protocols).
+.SS "detect"
+Detect the active DNS backend, NTP backend, and package manager.
+.PP
+.B dns detect
+.RI [ OPTIONS ]
+.SS "backup"
+Back up the current DNS configuration.
+.PP
+.B dns backup
+.RI [ OPTIONS ]
+.SS "restore"
+Restore DNS configuration from the latest backup.
+.PP
+.B dns restore
+.RI [ OPTIONS ]
+.SS "verify"
+Verify that DNS resolution is working.
+.PP
+.B dns verify
+.RI [ OPTIONS ]
+.SS "ntp"
+Configure NTP for a provider.
+.PP
+.B dns ntp
+.RI [ OPTIONS ]
+.PP
+Options:
+.TP
+.BR \-p ", " \-\-provider " " \fIPROVIDER\fR
+Provider slug (default: "cloudflare").
+.SS "vpn"
+Manage VPN connections.
+.PP
+.B dns vpn
+.RI <action>
+.RI [ OPTIONS ]
+.PP
+Actions:
+.TP
+.B connect
+Connect to a VPN provider.
+.TP
+.B disconnect
+Disconnect from a VPN provider.
+.TP
+.B status
+Show VPN status.
+.SS "schema"
+Emit JSON schema of available commands and arguments.
+.PP
+.B dns schema
+.RI [ OPTIONS ]
+.SS "describe"
+Emit tool manifest for agentic consumers.
+.PP
+.B dns describe
+.RI [ OPTIONS ]
+.SS "mcp"
+Run the Model Context Protocol server.
+.PP
+.B dns mcp
+.RI [ OPTIONS ]
+.SH EXAMPLES
+.TP
+.B dns detect
+Detect system DNS backend.
+.TP
+.B dns apply cloudflare doh
+Apply Cloudflare DNS over HTTPS.
+.TP
+.B dns apply cloudflare family doh
+Apply Cloudflare DNS with family filtering.
+.TP
+.B dns apply adguard standard doq
+Apply AdGuard DNS over QUIC (stub resolver fallback).
+.TP
+.B dns list --providers --json
+List all providers as JSON.
+.TP
+.B dns list --protocols --provider cloudflare --json
+List valid protocols for Cloudflare.
+.TP
+.B dns status --json
+Show current DNS/VPN status as JSON.
+.TP
+.B dns backup --json
+Back up current DNS configuration.
+.TP
+.B dns verify --json
+Verify DNS resolution is working.
+.TP
+.B dns ntp --provider cloudflare --json
+Configure NTP for Cloudflare.
+.TP
+.B dns vpn connect --provider warp --json
+Connect to Cloudflare WARP.
+.TP
+.B dns schema --json
+Emit command schema for LLM function calling.
+.SH EXIT STATUS
+.TP
+.B 0
+Success.
+.TP
+.B 1
+General error.
+.TP
+.B 2
+Usage error (invalid arguments, unknown provider/protocol).
+.TP
+.B 3
+I/O error.
+.TP
+.B 4
+Permission denied (elevation refused).
+.TP
+.B 5
+Apply failed.
+.TP
+.B 6
+Restore failed.
+.TP
+.B 7
+Verify failed.
+.TP
+.B 8
+Backup failed.
+.TP
+.B 9
+VPN error.
+.TP
+.B 10
+NTP error.
+.TP
+.B 64
+Bad usage / CLI parsing error.
+.SH FILES
+.TP
+.I /etc/resolv.conf
+System resolver configuration (modified by some backends).
+.TP
+.I ~/.local/share/flux/backups/
+Backup storage directory.
+.TP
+.I ~/.local/share/flux/.tmp/
+Temporary staging directory for privileged writes.
+.TP
+.I /etc/unbound/unbound.conf.d/flux.conf
+unbound DoQ configuration (stub backend).
+.TP
+.I /etc/dnscrypt-proxy/flux.toml
+dnscrypt-proxy configuration (stub backend).
+.SH ENVIRONMENT
+.TP
+.B NO_COLOR
+Disable colored output when set.
+.TP
+.B FORCE_COLOR
+Force colored output when set.
+.TP
+.B AI_AGENT, AGENT, CI, CLAUDECODE, CURSOR_AGENT, GEMINI_CLI
+Force JSON output and suppress interactive prompts when set.
+.SH AUTHORS
+Mohamed Hammad <Mohamed.Hammad@Steelbore.com>
+.SH SEE ALSO
+.BR resolv.conf (5),
+.BR systemd-resolved (8),
+.BR resolvectl (1),
+.BR nmcli (1),
+.BR unbound (8),
+.BR dnscrypt-proxy (8),
+.BR warp-cli (1)
+.SH REPORTING BUGS
+Report bugs at: https://github.com/steelbore/flux/issues
+.SH COPYRIGHT
+Copyright (C) 2026 Steelbore.
+License: GPL-3.0-or-later.
