@@ -466,7 +466,7 @@ impl ServerHandler for FluxMcpServer {
                 Implementation::new("flux-mcp", env!("CARGO_PKG_VERSION"))
                     .with_title("Flux MCP Server")
                     .with_description("DNS selector and network configurator MCP server")
-                    .with_website_url("https://Flux.Steelbore.com/"),
+                    .with_website_url("https://Flux.SpacecraftSoftware.org/"),
             )
             .with_protocol_version(ProtocolVersion::V_2024_11_05)
             .with_instructions(

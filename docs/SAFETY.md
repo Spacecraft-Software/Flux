@@ -14,4 +14,4 @@ If an `unsafe` block is ever required:
 2. Entry required in this file
 3. Entry must document: what, why, and why safe
 
-*--- Forged in Steelbore ---*
+*--- Forged in Spacecraft Software ---*

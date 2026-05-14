@@ -97,7 +97,7 @@ Run `dns` without arguments in an interactive terminal to launch the ratatui-bas
 ### From Source
 
 ```bash
-git clone https://github.com/steelbore/flux.git
+git clone https://github.com/Spacecraft-Software/flux.git
 cd flux
 cargo build --release
 sudo cp target/release/dns /usr/local/bin/
@@ -121,11 +121,11 @@ sudo cp target/release/dns /usr/local/bin/
 
 ## Links
 
-- Repository: https://github.com/steelbore/flux
-- Website: https://Flux.Steelbore.com/
+- Repository: https://github.com/Spacecraft-Software/flux
+- Website: https://Flux.SpacecraftSoftware.org/
 - PRD: [`Flux_PRD_v0.1.0.md`](./Flux_PRD_v0.1.0.md)
 - Changelog: [`CHANGELOG.md`](./CHANGELOG.md)
 
 ## Maintainers
 
-Mohamed Hammad <Mohamed.Hammad@Steelbore.com>
+Mohamed Hammad <Mohamed.Hammad@SpacecraftSoftware.org>

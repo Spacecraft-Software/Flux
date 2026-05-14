@@ -1,10 +1,10 @@
-# Maintainer: Mohamed Hammad <Mohamed.Hammad@Steelbore.com>
+# Maintainer: Mohamed Hammad <Mohamed.Hammad@SpacecraftSoftware.org>
 pkgname=flux-dns
 pkgver=0.1.0
 pkgrel=1
 pkgdesc="DNS selector and network configurator CLI for Linux and BSD"
 arch=('x86_64' 'aarch64')
-url="https://Flux.Steelbore.com/"
+url="https://Flux.SpacecraftSoftware.org/"
 license=('GPL-3.0-or-later')
 depends=('glibc')
 makedepends=('rust' 'cargo')
@@ -16,7 +16,7 @@ optdepends=(
   'warp-cli: Cloudflare WARP VPN support'
   'adguardvpn-cli: AdGuard VPN support'
 )
-source=("$pkgname-$pkgver.tar.gz::https://github.com/steelbore/flux/archive/v$pkgver.tar.gz")
+source=("$pkgname-$pkgver.tar.gz::https://github.com/Spacecraft-Software/flux/archive/v$pkgver.tar.gz")
 sha256sums=('SKIP')
 
 prepare() {

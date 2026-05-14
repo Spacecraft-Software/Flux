@@ -30,4 +30,4 @@ For `dns update-registry` (fetchable provider registry), Flux will use **rustls*
 | v0.2.0 | `update-registry` with rustls + PQC-hybrid |
 | v0.3.0 | Runtime DNSCrypt stamp fetching with PQC-aware transport |
 
-*--- Forged in Steelbore ---*
+*--- Forged in Spacecraft Software ---*

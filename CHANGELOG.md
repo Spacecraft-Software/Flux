@@ -37,4 +37,4 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **Compliance**: SPDX headers on all source files, `jiff` for UTC timestamps, `cargo-deny` license/advisory gating
 - **CI/CD**: GitHub Actions workflow with build, test, clippy, fmt, deny, and audit gates
 
-[0.1.0]: https://github.com/steelbore/flux/releases/tag/v0.1.0
+[0.1.0]: https://github.com/Spacecraft-Software/flux/releases/tag/v0.1.0

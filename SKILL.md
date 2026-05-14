@@ -2,8 +2,8 @@
 name: flux
 description: DNS selector and network configurator CLI for Linux and BSD
 license: GPL-3.0-or-later
-maintainer: Mohamed Hammad <Mohamed.Hammad@Steelbore.com>
-website: https://Flux.Steelbore.com/
+maintainer: Mohamed Hammad <Mohamed.Hammad@SpacecraftSoftware.org>
+website: https://Flux.SpacecraftSoftware.org/
 ---
 
 # Flux Skill

@@ -5,7 +5,7 @@ use std::io::{self, IsTerminal};
 use crate::error::AppError;
 use crate::output::mode::ColorMode;
 
-/// Steelbore v1.2 six-token palette — ANSI 24-bit foreground sequences.
+/// Spacecraft Software v1.2 six-token palette — ANSI 24-bit foreground sequences.
 const RED_OXIDE: &str = "\x1b[38;2;255;92;92m";
 const MOLTEN_AMBER: &str = "\x1b[38;2;217;142;50m";
 const LIQUID_COOLANT: &str = "\x1b[38;2;139;233;253m";

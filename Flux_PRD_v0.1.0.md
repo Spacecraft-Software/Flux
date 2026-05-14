@@ -1,8 +1,8 @@
 <!--
-  Steelbore Document — GFM Companion
-  Source format: .docx (MS Office; secondary per steelbore-document-format §1)
+  Spacecraft Software Document — GFM Companion
+  Source format: .docx (MS Office; secondary per spacecraft-document-format §1)
   Sibling: Flux_PRD_v0.1.0.docx (same basename, same directory)
-  Palette: Steelbore Standard v1.2 §9 (Void Navy + 5 accents)
+  Palette: Spacecraft Software Standard v1.2 §9 (Void Navy + 5 accents)
   Typography: Share Tech Mono (headings) + Inconsolata (body) — Standard v1.2 §10
   License: GPL-3.0-or-later (per project root; SPDX header rule does not apply to documents — Standard v1.2 §4)
   Authority: If this .md and the .docx disagree, this .md wins on regeneration (skill §2).
@@ -11,16 +11,16 @@
 # FLUX — DNS Selector & Network Configurator
 
 **Product Requirements Document**
-A Steelbore Project
+A Spacecraft Software
 
 | Field | Value |
 |-------|-------|
 | Product Version | 0.1.0 (MVP) |
 | PRD Revision | 2026-05-12 |
-| Standard | The Steelbore Standard v1.2 (2026-05-11) |
+| Standard | The Spacecraft Software Standard v1.2 (2026-05-11) |
 | License | GPL-3.0-or-later |
-| Maintainer | Mohamed Hammad &lt;Mohamed.Hammad@Steelbore.com&gt; |
-| Project URL | https://Flux.Steelbore.com/ |
+| Maintainer | Mohamed Hammad &lt;Mohamed.Hammad@SpacecraftSoftware.org&gt; |
+| Project URL | https://Flux.SpacecraftSoftware.org/ |
 
 ---
 
@@ -40,7 +40,7 @@ A Steelbore Project
 9. [CLI Interface Specification](#9--cli-interface-specification)
 10. [Agent-Facing UX](#10--agent-facing-ux)
 11. [TUI Interface Specification](#11--tui-interface-specification)
-12. [Security, PQC & Steelbore Compliance](#12--security-pqc--steelbore-compliance)
+12. [Security, PQC & Spacecraft Software Compliance](#12--security-pqc--spacecraft-software-compliance)
 13. [Attribution & Maintainership](#13--attribution--maintainership)
 14. [Future Scope](#14--future-scope)
 15. [Compliance Audit Gate](#15--compliance-audit-gate)
@@ -50,14 +50,14 @@ A Steelbore Project
 
 ## 1 — Preamble & Compliance Statement
 
-**FLUX** is a DNS selector and network configurator built under the Steelbore project umbrella. This PRD governs the design, scope, and engineering requirements for Flux v0.1.0 (MVP). All requirements herein comply with:
+**FLUX** is a DNS selector and network configurator built under the Spacecraft Software project umbrella. This PRD governs the design, scope, and engineering requirements for Flux v0.1.0 (MVP). All requirements herein comply with:
 
-- **The Steelbore Standard v1.2** (2026-05-11) — the master engineering standard.
-- **Steelbore Dual-Mode Self-Documenting CLI Framework (SFRS v1.0.0)** — structural CLI rules.
-- **Steelbore Agentic CLI Standard v1.0.0** — agent-facing UX layer.
-- **Steelbore Document Format** — ODF/MS Office authoring rules with mandatory GFM Markdown companion.
+- **The Spacecraft Software Standard v1.2** (2026-05-11) — the master engineering standard.
+- **Spacecraft Software Dual-Mode Self-Documenting CLI Framework (SFRS v1.0.0)** — structural CLI rules.
+- **Spacecraft Software Agentic CLI Standard v1.0.0** — agent-facing UX layer.
+- **Spacecraft Software Document Format** — ODF/MS Office authoring rules with mandatory GFM Markdown companion.
 
-Where this PRD is silent, those standards prevail. Where they conflict, the Steelbore Standard (master) takes precedence.
+Where this PRD is silent, those standards prevail. Where they conflict, the Spacecraft Software Standard (master) takes precedence.
 
 The CLI binary is named `dns`, providing a memorable command-line entry point. **Flux** is the project codename used in documentation, repository, and packaging. A `flux` shell alias is installed for discoverability.
 
@@ -132,7 +132,7 @@ Flux is structured as a layered system with clean separation between user interf
 
 ### 4.1 — In Scope
 
-- TUI interface with full Steelbore v1.2 theming (Void Navy background, six-token palette, Share Tech Mono + Inconsolata, Vim + CUA keybindings).
+- TUI interface with full Spacecraft Software v1.2 theming (Void Navy background, six-token palette, Share Tech Mono + Inconsolata, Vim + CUA keybindings).
 - CLI binary `dns` with POSIX-compliant flag grammar, positional shorthand, full SFRS §3 global flags, `--json`, `--format`, `--fields`, and structured errors.
 - `dns schema` and `dns describe` subcommands for self-documentation (SFRS §2 Rule 4).
 - `dns mcp` — lazy-loading MCP server surface (SFRS §2 Rule 8).
@@ -146,7 +146,7 @@ Flux is structured as a layered system with clean separation between user interf
 
 ### 4.2 — Out of Scope (Future Releases)
 
-- GUI interface (planned: GTK4 or Iced; Material Design + Steelbore palette).
+- GUI interface (planned: GTK4 or Iced; Material Design + Spacecraft Software palette).
 - Windows 10/11 support (PowerShell/netsh backend).
 - macOS support.
 - DNS benchmark / latency comparison.
@@ -249,7 +249,7 @@ The VPN trait surface is extensible. Future adapters: WireGuard native CLI, Mull
 
 ### 5.8 — Fetchable Provider Registry (v0.2 / v0.3)
 
-- **Registry file:** signed TOML at `https://raw.githubusercontent.com/steelbore/flux/main/registry.toml`, versioned, GPG-signed.
+- **Registry file:** signed TOML at `https://raw.githubusercontent.com/Spacecraft-Software/flux/main/registry.toml`, versioned, GPG-signed.
 - **Update:** `dns update-registry` fetches, verifies signature, stores at `~/.local/share/flux/registry.toml`. Compiled-in registry is fallback.
 - **DNSCrypt stamps:** fetched on first user-initiated run (v0.2/v0.3) rather than build time.
 - **Privacy:** user-initiated only. No automatic background fetching. Consistent with PFA policy (§12.4).
@@ -337,7 +337,7 @@ Windows 10 (Build 19628+) / 11 with native DoH; PowerShell + netsh backend. macO
 
 ## 9 — CLI Interface Specification
 
-The Flux CLI is a Dual-Mode Self-Documenting CLI per the Steelbore SFRS v1.0.0. It serves two co-equal readers: humans in interactive terminals and AI agents paying for tokens. Both modes are tuned independently; neither subsidizes the other.
+The Flux CLI is a Dual-Mode Self-Documenting CLI per the Spacecraft Software SFRS v1.0.0. It serves two co-equal readers: humans in interactive terminals and AI agents paying for tokens. Both modes are tuned independently; neither subsidizes the other.
 
 ### 9.1 — Command Grammar & POSIX Compliance
 
@@ -385,7 +385,7 @@ Standard verbs follow SFRS §2 Rule 7: `list`, `get`, `create`, `update`, `delet
 
 ### 9.3 — Global Flags (SFRS §3)
 
-Every Steelbore CLI accepts these flags with identical semantics. Divergence is a BLOCKER.
+Every Spacecraft Software CLI accepts these flags with identical semantics. Divergence is a BLOCKER.
 
 | Flag | Effect |
 |------|--------|
@@ -443,8 +443,8 @@ Every `--json` response is a single valid JSON document. snake_case property nam
     "command": "dns apply",
     "timestamp": "2026-05-12T14:30:00Z",
     "invoking_agent": "claude-code",
-    "maintainer": "Mohamed Hammad <Mohamed.Hammad@Steelbore.com>",
-    "website": "https://Flux.Steelbore.com/"
+    "maintainer": "Mohamed Hammad <Mohamed.Hammad@SpacecraftSoftware.org>",
+    "website": "https://Flux.SpacecraftSoftware.org/"
   },
   "data": {
     "provider": "cloudflare",
@@ -469,7 +469,7 @@ Every non-zero exit in machine mode emits a structured error to stderr. The `hin
     "hint": "dns detect --json",
     "timestamp": "2026-05-12T14:30:00Z",
     "command": "dns apply cloudflare family dot",
-    "docs_url": "https://Flux.Steelbore.com/errors/DETECTION_FAILED"
+    "docs_url": "https://Flux.SpacecraftSoftware.org/errors/DETECTION_FAILED"
   }
 }
 ```
@@ -528,7 +528,7 @@ dns mcp
 
 ## 10 — Agent-Facing UX
 
-Per the Steelbore Agentic CLI Standard v1.0.0, Flux is designed for two co-equal readers from day one.
+Per the Spacecraft Software Agentic CLI Standard v1.0.0, Flux is designed for two co-equal readers from day one.
 
 ### 10.1 — Two-Readers Model
 
@@ -547,7 +547,7 @@ Context files are runtime configuration for agents, not documentation. These fou
 |------|------------------|----------|
 | `AGENTS.md` | Generic agents (Codex, Cursor, Aider, OpenCode) | Coding conventions, build/test commands, repo invariants, forbidden patterns |
 | `CLAUDE.md` | Claude Code | AGENTS.md content + Claude-specific skills, MCP servers, tool preferences |
-| `SKILL.md` | Steelbore Skills + CLI-Anything | YAML frontmatter + capability surface of the CLI |
+| `SKILL.md` | Spacecraft Software Skills + CLI-Anything | YAML frontmatter + capability surface of the CLI |
 | `CONTRIBUTING.md` | Human contributors | Onboarding, dev env, PR conventions, sign-off, security reporting |
 
 Plus the posture files (§1.3): `README.md`, `NOTICE.md`, `LICENSE`.
@@ -588,7 +588,7 @@ Per SFRS §2 Rule 8, Flux exposes an MCP (Model Context Protocol) server for the
 
 The TUI is launched via `dns` (no subcommand) or `dns --format explore`. Recommended library: `ratatui` + `crossterm`.
 
-### 11.1 — Steelbore v1.2 Palette
+### 11.1 — Spacecraft Software v1.2 Palette
 
 | Token | Hex | TUI Role |
 |-------|-----|----------|
@@ -599,7 +599,7 @@ The TUI is launched via `dns` (no subcommand) or `dns --format explore`. Recomme
 | Liquid Coolant | `#8BE9FD` | Info, hints, links |
 | Red Oxide | `#FF5C5C` | Warning, error |
 
-**Removed in v1.2:** Steel Orange (`#FE6B00`) is no longer a Steelbore palette token. Earlier Flux drafts referencing it are obsolete.
+**Removed in v1.2:** Steel Orange (`#FE6B00`) is no longer a Spacecraft Software palette token. Earlier Flux drafts referencing it are obsolete.
 
 ### 11.2 — Screen Flow
 
@@ -627,11 +627,11 @@ The TUI is launched via `dns` (no subcommand) or `dns --format explore`. Recomme
 
 ---
 
-## 12 — Security, PQC & Steelbore Compliance
+## 12 — Security, PQC & Spacecraft Software Compliance
 
 ### 12.1 — Priority 1: Memory Safety (Standard §3.1)
 
-- **Rust** — the Steelbore-mandated language. `rust-guidelines` skill loaded before any Rust is written.
+- **Rust** — the Spacecraft Software-mandated language. `rust-guidelines` skill loaded before any Rust is written.
 - No `unsafe` blocks without a documented safety justification (code comment + entry in `SAFETY.md`).
 - `cargo audit` runs on every CI build; any RUSTSEC advisory fails the build.
 
@@ -685,25 +685,25 @@ When invoked by an agent, the CLI is the last line of defense before the host sy
 
 ## 13 — Attribution & Maintainership
 
-Per Standard v1.2 §13, every Steelbore product surfaces the following attribution in `--help`, `--version`, README, and any About/Info screen.
+Per Standard v1.2 §13, every Spacecraft Software product surfaces the following attribution in `--help`, `--version`, README, and any About/Info screen.
 
 | Field | Value |
 |-------|-------|
 | Maintainer | Mohamed Hammad |
-| Contact | `Mohamed.Hammad@Steelbore.com` |
+| Contact | `Mohamed.Hammad@SpacecraftSoftware.org` |
 | Copyright | (c) 2026 Mohamed Hammad |
 | License | GPL-3.0-or-later |
-| Website | https://Flux.Steelbore.com/ |
+| Website | https://Flux.SpacecraftSoftware.org/ |
 
 **Per-surface rules:**
 
-- `--version` (human): footer line "Maintained by Mohamed Hammad &lt;Mohamed.Hammad@Steelbore.com&gt;" + project URL.
+- `--version` (human): footer line "Maintained by Mohamed Hammad &lt;Mohamed.Hammad@SpacecraftSoftware.org&gt;" + project URL.
 - `--version --json`: include `"maintainer"` and `"website"` in metadata envelope.
 - `--help`: footer with project URL and maintainer name.
 - `README.md`: "Maintainer" section with name, email, project URL.
 - TUI About screen: maintainer, project URL, copyright year.
 
-Contact must always be `Mohamed.Hammad@Steelbore.com` — never a personal domain or GitHub handle.
+Contact must always be `Mohamed.Hammad@SpacecraftSoftware.org` — never a personal domain or GitHub handle.
 
 ---
 
@@ -711,7 +711,7 @@ Contact must always be `Mohamed.Hammad@Steelbore.com` — never a personal domai
 
 ### 14.1 — GUI Interface (v0.2.0+)
 
-- GTK4 (gtk4-rs) or Iced framework, Material Design + Steelbore palette.
+- GTK4 (gtk4-rs) or Iced framework, Material Design + Spacecraft Software palette.
 - System tray indicator showing current DNS provider and VPN state.
 
 ### 14.2 — Windows + macOS (v0.2.0+)
@@ -769,10 +769,10 @@ Before tagging any release of Flux, verify each item below. This list is the run
 
 | Reference | Description |
 |-----------|-------------|
-| The Steelbore Standard v1.2 (2026-05-11) | Master engineering standard. Governs all sections. |
-| Steelbore SFRS v1.0.0 (2026-04-10) | Dual-Mode Self-Documenting CLI Framework. |
-| Steelbore Agentic CLI Standard v1.0.0 (2026-04-10) | Agent-facing UX layer. |
-| Steelbore Document Format | ODF/MS Office authoring with GFM Markdown companion. |
+| The Spacecraft Software Standard v1.2 (2026-05-11) | Master engineering standard. Governs all sections. |
+| Spacecraft Software SFRS v1.0.0 (2026-04-10) | Dual-Mode Self-Documenting CLI Framework. |
+| Spacecraft Software Agentic CLI Standard v1.0.0 (2026-04-10) | Agent-facing UX layer. |
+| Spacecraft Software Document Format | ODF/MS Office authoring with GFM Markdown companion. |
 | IEEE Std 1003.1 (POSIX) | CLI utility conventions. |
 | RFC 1035 | DNS plain protocol. |
 | RFC 7858 | DNS over TLS (DoT). |
@@ -787,4 +787,4 @@ Before tagging any release of Flux, verify each item below. This list is the run
 
 ---
 
-*--- Forged in Steelbore ---*
+*--- Forged in Spacecraft Software ---*

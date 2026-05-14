@@ -40,7 +40,7 @@
             description = manifest.package.description;
             homepage = manifest.package.homepage;
             license = licenses.gpl3Plus;
-            maintainers = [ "Mohamed Hammad <Mohamed.Hammad@Steelbore.com>" ];
+            maintainers = [ "Mohamed Hammad <Mohamed.Hammad@SpacecraftSoftware.org>" ];
             mainProgram = "dns";
           };
         };

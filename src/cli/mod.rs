@@ -13,8 +13,8 @@ pub mod schema;
 #[command(long_about = concat!(
     "Flux — DNS Selector & Network Configurator\n",
     "\n",
-    "Maintained by Mohamed Hammad <Mohamed.Hammad@Steelbore.com>\n",
-    "https://Flux.Steelbore.com/"
+    "Maintained by Mohamed Hammad <Mohamed.Hammad@SpacecraftSoftware.org>\n",
+    "https://Flux.SpacecraftSoftware.org/"
 ))]
 pub struct Cli {
     #[command(subcommand)]

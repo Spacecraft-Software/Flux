@@ -8,7 +8,7 @@ use serde_json::json;
 pub fn emit_schema(_mode: &OutputMode) -> Result<serde_json::Value, AppError> {
     let schema = json!({
         "$schema": "https://json-schema.org/draft/2020-12/schema",
-        "$id": "https://Flux.Steelbore.com/schema/flux-v0.1.0.json",
+        "$id": "https://Flux.SpacecraftSoftware.org/schema/flux-v0.1.0.json",
         "title": "Flux CLI Schema",
         "description": "JSON Schema for the dns CLI surface",
         "version": "0.1.0",

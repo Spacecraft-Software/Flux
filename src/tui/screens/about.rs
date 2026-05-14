@@ -57,7 +57,7 @@ pub fn draw(f: &mut Frame, _app: &App) {
             Style::default().fg(Palette::STEEL_BLUE),
         )),
         Line::from(Span::styled(
-            "Mohamed Hammad <Mohamed.Hammad@Steelbore.com>",
+            "Mohamed Hammad <Mohamed.Hammad@SpacecraftSoftware.org>",
             Style::default().fg(Palette::MOLTEN_AMBER),
         )),
         Line::from(""),
@@ -66,7 +66,7 @@ pub fn draw(f: &mut Frame, _app: &App) {
             Style::default().fg(Palette::STEEL_BLUE),
         )),
         Line::from(Span::styled(
-            "https://Flux.Steelbore.com/",
+            "https://Flux.SpacecraftSoftware.org/",
             Style::default().fg(Palette::LIQUID_COOLANT),
         )),
         Line::from(""),

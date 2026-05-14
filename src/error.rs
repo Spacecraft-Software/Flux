@@ -54,7 +54,9 @@ impl AppError {
             hint: hint.into(),
             timestamp: crate::output::now_utc(),
             command: std::env::args().collect::<Vec<_>>().join(" "),
-            docs_url: Some(format!("https://Flux.Steelbore.com/errors/{code:?}")),
+            docs_url: Some(format!(
+                "https://Flux.SpacecraftSoftware.org/errors/{code:?}"
+            )),
         }
     }
 

@@ -2,14 +2,14 @@
 <!-- SPDX-License-Identifier: GPL-3.0-or-later (does not apply to this document per Standard v1.2 §4; informational only) -->
 <!--
   Companion to: Flux_PRD_v0.1.0.docx / Flux_PRD_v0.1.0.md
-  Standard: The Steelbore Standard v1.2 (2026-05-11)
+  Standard: The Spacecraft Software Standard v1.2 (2026-05-11)
   Spec dates: SFRS v1.0.0 + Agentic CLI v1.0.0 (both 2026-04-10)
   Last revision: 2026-05-12
 -->
 
 **DNS Selector & Network Configurator — MVP Task List**
-A Steelbore Project · Maintainer: Mohamed Hammad &lt;Mohamed.Hammad@Steelbore.com&gt;
-Project URL: https://Flux.Steelbore.com/
+A Spacecraft Software · Maintainer: Mohamed Hammad &lt;Mohamed.Hammad@SpacecraftSoftware.org&gt;
+Project URL: https://Flux.SpacecraftSoftware.org/
 
 ---
 
@@ -20,7 +20,7 @@ Project URL: https://Flux.Steelbore.com/
 - `[x]` Done
 - `[!]` Blocked / needs decision
 
-References in `(§N.N)` point to the matching PRD section. **SFRS** = `steelbore-cli-standard`. **ACS** = `steelbore-agentic-cli`. **STD** = `steelbore-standard`. **DOC** = `steelbore-document-format`.
+References in `(§N.N)` point to the matching PRD section. **SFRS** = `spacecraft-cli-standard`. **ACS** = `spacecraft-agentic-cli`. **STD** = `spacecraft-standard`. **DOC** = `spacecraft-document-format`.
 
 ---
 
@@ -81,7 +81,7 @@ References in `(§N.N)` point to the matching PRD section. **SFRS** = `steelbore
 ### 1.2 — Agent Context Files (ACS §2)
 
 - [x] `AGENTS.md` — coding conventions (Rust + Nushell/Ion preferred), `cargo test` / `cargo clippy` commands, repo invariants (`no unsafe without SAFETY.md`, `UTC Z mandatory`, `argv arrays only`), forbidden patterns (shell interpolation, `NaiveDateTime` in output, `time` 0.1.x crate)
-- [x] `CLAUDE.md` — AGENTS.md content + Claude-specific: skills loaded (`rust-guidelines`, `steelbore-standard`, `steelbore-cli-standard`, `steelbore-agentic-cli`), MCP servers expected, preferred shells (Nushell + Ion)
+- [x] `CLAUDE.md` — AGENTS.md content + Claude-specific: skills loaded (`rust-guidelines`, `spacecraft-standard`, `spacecraft-cli-standard`, `spacecraft-agentic-cli`), MCP servers expected, preferred shells (Nushell + Ion)
 - [x] `SKILL.md` — YAML frontmatter (name, description, license, maintainer, website) + capability surface of the `dns` CLI
 
 ### 1.3 — Engineering-Reference Files
@@ -382,14 +382,14 @@ References in `(§N.N)` point to the matching PRD section. **SFRS** = `steelbore
 ### 12.1 — Library & Theme
 
 - [x] Add `ratatui` + `crossterm` backend
-- [x] **Steelbore v1.2 palette** (six tokens only — STD §9):
+- [x] **Spacecraft Software v1.2 palette** (six tokens only — STD §9):
   - [x] Background: Void Navy `#000027`
   - [x] Body text: Molten Amber `#D98E32`
   - [x] Headings / accent: Steel Blue `#4B7EB0`
   - [x] Success / selection: Radium Green `#50FA7B`
   - [x] Info / links: Liquid Coolant `#8BE9FD`
   - [x] Warning / error: Red Oxide `#FF5C5C`
-- [x] **REMOVED in v1.2:** Steel Orange `#FE6B00` — no longer a Steelbore token; do NOT use anywhere
+- [x] **REMOVED in v1.2:** Steel Orange `#FE6B00` — no longer a Spacecraft Software token; do NOT use anywhere
 - [~] Verify all foreground pairs meet WCAG 2.1 AA against Void Navy
 - [x] Honor `NO_COLOR`, `--no-color`, `TERM=dumb`
 
@@ -480,12 +480,12 @@ References in `(§N.N)` point to the matching PRD section. **SFRS** = `steelbore
 
 ### 13.8 — Attribution Surfaces (STD §13.2)
 
-- [x] `--version` human mode: footer "Maintained by Mohamed Hammad &lt;Mohamed.Hammad@Steelbore.com&gt;" + `https://Flux.Steelbore.com/`
+- [x] `--version` human mode: footer "Maintained by Mohamed Hammad &lt;Mohamed.Hammad@SpacecraftSoftware.org&gt;" + `https://Flux.SpacecraftSoftware.org/`
 - [x] `--version --json`: `metadata.maintainer` + `metadata.website` populated
 - [x] `--help` footer: project URL + maintainer name
 - [x] `README.md`: "Maintainer" section with name, email, project URL
 - [x] TUI About screen: maintainer, project URL, copyright year
-- [x] Contact email always `Mohamed.Hammad@Steelbore.com` — never personal domain or GitHub handle
+- [x] Contact email always `Mohamed.Hammad@SpacecraftSoftware.org` — never personal domain or GitHub handle
 
 ---
 
@@ -588,4 +588,4 @@ Before tagging v0.1.0 release, verify every row of the PRD §15 audit table pass
 
 ---
 
-*--- Forged in Steelbore ---*
+*--- Forged in Spacecraft Software ---*

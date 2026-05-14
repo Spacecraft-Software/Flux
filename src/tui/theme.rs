@@ -2,7 +2,7 @@
 
 use ratatui::style::Color;
 
-/// Steelbore v1.2 six-token palette.
+/// Spacecraft Software v1.2 six-token palette.
 pub struct Palette;
 
 impl Palette {

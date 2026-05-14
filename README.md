@@ -2,7 +2,7 @@
 
 **DNS Selector & Network Configurator** for Linux and BSD.
 
-Flux detects the active DNS/NTP subsystem, applies encrypted DNS (DoT/DoH/DoQ/DNSCrypt), optionally configures NTP, and orchestrates VPN clients (Cloudflare WARP, AdGuard VPN CLI). Part of Project Steelbore.
+Flux detects the active DNS/NTP subsystem, applies encrypted DNS (DoT/DoH/DoQ/DNSCrypt), optionally configures NTP, and orchestrates VPN clients (Cloudflare WARP, AdGuard VPN CLI). Part of Project Spacecraft Software.
 
 ## Quick Start
 
@@ -56,8 +56,8 @@ cargo test --workspace
 
 ## Maintainer
 
-- **Mohamed Hammad** &lt;Mohamed.Hammad@Steelbore.com&gt;
-- **Project URL:** https://Flux.Steelbore.com/
+- **Mohamed Hammad** &lt;Mohamed.Hammad@SpacecraftSoftware.org&gt;
+- **Project URL:** https://Flux.SpacecraftSoftware.org/
 - **License:** GPL-3.0-or-later
 
-*--- Forged in Steelbore ---*
+*--- Forged in Spacecraft Software ---*

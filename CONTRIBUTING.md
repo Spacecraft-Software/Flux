@@ -27,7 +27,7 @@ license document, but changing it is not allowed.
 
 ## Security Reporting
 
-Report security issues directly to Mohamed.Hammad@Steelbore.com. Do not open public issues for security vulnerabilities.
+Report security issues directly to Mohamed.Hammad@SpacecraftSoftware.org. Do not open public issues for security vulnerabilities.
 
 ## License of Contributions
 
@@ -39,4 +39,4 @@ All contributions are licensed under GPL-3.0-or-later.
 - `cargo clippy --workspace --all-targets -- -D warnings`
 - SPDX header on every `.rs` file
 
-*--- Forged in Steelbore ---*
+*--- Forged in Spacecraft Software ---*

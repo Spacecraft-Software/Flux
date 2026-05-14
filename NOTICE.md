@@ -8,6 +8,6 @@ For binding terms, see the `LICENSE` file (GPL-3.0-or-later).
 
 ## Maintainer
 
-Mohamed Hammad &lt;Mohamed.Hammad@Steelbore.com&gt;
+Mohamed Hammad &lt;Mohamed.Hammad@SpacecraftSoftware.org&gt;
 
-Project URL: https://Flux.Steelbore.com/
+Project URL: https://Flux.SpacecraftSoftware.org/

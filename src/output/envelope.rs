@@ -42,8 +42,8 @@ impl Default for Metadata {
             timestamp: super::now_utc(),
             pagination: None,
             invoking_agent,
-            maintainer: "Mohamed Hammad <Mohamed.Hammad@Steelbore.com>".to_string(),
-            website: "https://Flux.Steelbore.com/".to_string(),
+            maintainer: "Mohamed Hammad <Mohamed.Hammad@SpacecraftSoftware.org>".to_string(),
+            website: "https://Flux.SpacecraftSoftware.org/".to_string(),
         }
     }
 }
