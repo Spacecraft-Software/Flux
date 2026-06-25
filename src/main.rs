@@ -144,13 +144,15 @@ async fn run_cli(cmd: Option<Commands>, mode: &OutputMode) -> Result<serde_json:
                         })
                     })
                     .collect();
-                serde_json::json!({ "providers": providers })
+                // List subcommands return a bare array as `data` so `--fields`
+                // selects columns and `--format jsonl` streams one record per line.
+                serde_json::Value::Array(providers)
             } else if args.tiers {
                 let slug = args.provider.as_deref().unwrap_or("cloudflare");
                 let provider = registry::get_provider(slug)
                     .ok_or_else(|| AppError::usage_error(format!("Unknown provider: {slug}")))?;
                 let tiers: Vec<_> = provider.tiers.iter().map(|t| t.to_string()).collect();
-                serde_json::json!({ "provider": slug, "tiers": tiers })
+                serde_json::json!(tiers)
             } else if args.protocols {
                 let slug = args.provider.as_deref().unwrap_or("cloudflare");
                 let provider = registry::get_provider(slug)
@@ -161,16 +163,14 @@ async fn run_cli(cmd: Option<Commands>, mode: &OutputMode) -> Result<serde_json:
                     .iter()
                     .map(|p| p.to_string())
                     .collect();
-                serde_json::json!({ "provider": slug, "tier": tier.map(|t| t.to_string()), "protocols": protocols })
+                serde_json::json!(protocols)
             } else if args.vpn {
                 let warp = vpn::warp::WarpProvider;
                 let adguard = vpn::adguard::AdGuardVpnProvider;
-                serde_json::json!({
-                    "vpn_clients": [
-                        { "name": "warp", "available": warp.is_available() },
-                        { "name": "adguard", "available": adguard.is_available() }
-                    ]
-                })
+                serde_json::json!([
+                    { "name": "warp", "available": warp.is_available() },
+                    { "name": "adguard", "available": adguard.is_available() }
+                ])
             } else {
                 serde_json::json!({
                     "providers": registry::list_providers().len(),
