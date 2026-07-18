@@ -43,7 +43,7 @@ pub enum ColorMode {
 impl OutputMode {
     /// Compute output mode from CLI flags and environment.
     ///
-    /// Cascade order (SFRS §5):
+    /// Cascade order (the CLI Standard §5):
     /// 1. Explicit --format / --json flag
     /// 2. Agent env: AI_AGENT=1, AGENT=1, CI=true → JSON, no-color, no-TUI, non-interactive
     /// 3. TTY → human mode + color

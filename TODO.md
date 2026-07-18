@@ -3,7 +3,7 @@
 <!--
   Companion to: Flux_PRD_v0.1.0.docx / Flux_PRD_v0.1.0.md
   Standard: The Spacecraft Software Standard v1.2 (2026-05-11)
-  Spec dates: SFRS v1.0.0 + Agentic CLI v1.0.0 (both 2026-04-10)
+  Spec dates: the CLI Standard v1.0.0 + Agentic CLI v1.0.0 (both 2026-04-10)
   Last revision: 2026-05-12
 -->
 
@@ -20,7 +20,7 @@ Project URL: https://Flux.SpacecraftSoftware.org/
 - `[x]` Done
 - `[!]` Blocked / needs decision
 
-References in `(§N.N)` point to the matching PRD section. **SFRS** = `spacecraft-cli-standard`. **ACS** = `spacecraft-agentic-cli`. **STD** = `spacecraft-standard`. **DOC** = `spacecraft-document-format`.
+References in `(§N.N)` point to the matching PRD section. **ACS** = `spacecraft-agentic-cli`. **STD** = `spacecraft-standard`. **DOC** = `spacecraft-document-format`.
 
 ---
 
@@ -235,7 +235,7 @@ References in `(§N.N)` point to the matching PRD section. **SFRS** = `spacecraf
 
 ---
 
-## 10 — CLI Surface (§9) — SFRS v1.0.0
+## 10 — CLI Surface (§9) — the CLI Standard v1.0.0
 
 ### 10.1 — Argument Parsing
 
@@ -259,13 +259,13 @@ References in `(§N.N)` point to the matching PRD section. **SFRS** = `spacecraf
 - [x] `dns backup` — manual snapshot
 - [x] `dns ntp` — configure NTP independently
 - [x] `dns vpn connect | disconnect | status`
-- [x] `dns schema` — emit JSON Schema Draft 2020-12 for the full CLI surface (SFRS §2 Rule 4)
-- [x] `dns describe` — human + machine manifest of the CLI (SFRS §2 Rule 4)
-- [x] `dns mcp` — launch MCP server with lazy schema loading (SFRS §2 Rule 8; ACS §6)
+- [x] `dns schema` — emit JSON Schema Draft 2020-12 for the full CLI surface (the CLI Standard §2 Rule 4)
+- [x] `dns describe` — human + machine manifest of the CLI (the CLI Standard §2 Rule 4)
+- [x] `dns mcp` — launch MCP server with lazy schema loading (the CLI Standard §2 Rule 8; ACS §6)
 - [x] `dns update-registry` — v0.2+ stub (print "coming in v0.2.0")
 - [x] `dns` (no subcommand) / `dns --format explore` → TUI
 
-### 10.3 — Global Flags (SFRS §3) — IDENTICAL ACROSS ALL STEELBORE CLIs
+### 10.3 — Global Flags (the CLI Standard §3) — IDENTICAL ACROSS ALL STEELBORE CLIs
 
 - [x] `--json` — alias for `--format json`
 - [x] `--format <fmt>` — `json`, `jsonl`, `yaml`, `csv`, `explore`
@@ -288,7 +288,7 @@ References in `(§N.N)` point to the matching PRD section. **SFRS** = `spacecraf
 - [x] `--vpn warp|adguard`
 - [x] `--no-backup`, `--no-verify`
 
-### 10.5 — Output Mode Detection Cascade (§9.5, SFRS §5)
+### 10.5 — Output Mode Detection Cascade (§9.5, the CLI Standard §5)
 
 - [x] Single `OutputMode` struct shared by every subcommand
 - [x] Cascade order:
@@ -302,7 +302,7 @@ References in `(§N.N)` point to the matching PRD section. **SFRS** = `spacecraf
 - [x] Color precedence: `NO_COLOR` > `FORCE_COLOR` > `CLICOLOR` > `--color` > `--no-color` > TTY detection
 - [x] **Explore guard:** if `AI_AGENT=1` and `--format explore` requested, fall back to JSON and warn on stderr (never trap an agent in interactive UI)
 
-### 10.6 — JSON Output Envelope (§9.6, SFRS §6)
+### 10.6 — JSON Output Envelope (§9.6, the CLI Standard §6)
 
 - [x] Define generic `Response<T>` type: `{ metadata: Metadata, data: T }`
 - [x] `Metadata` struct: `tool`, `version`, `command`, `timestamp` (UTC `Z`), `pagination` (optional), `invoking_agent` (optional), `maintainer`, `website`
@@ -314,7 +314,7 @@ References in `(§N.N)` point to the matching PRD section. **SFRS** = `spacecraf
 - [x] Numbers as JSON numbers (not strings); booleans `true`/`false`; nulls as JSON `null` (never `""` or `"N/A"`)
 - [x] Schema version field for breaking-change tracking
 
-### 10.7 — Structured Errors (§9.7, SFRS §1 #8, ACS §3)
+### 10.7 — Structured Errors (§9.7, the CLI Standard §1 #8, ACS §3)
 
 - [x] Define `AppError` struct: `code` (enum), `exit_code`, `message`, `hint`, `timestamp` (UTC `Z`), `command`, `docs_url`
 - [x] Enum variants for every canonical and tool-specific error condition
@@ -330,7 +330,7 @@ References in `(§N.N)` point to the matching PRD section. **SFRS** = `spacecraf
 - [~] In human mode: render error as Red Oxide `#FF5C5C` text + readable hint
 - [x] In machine mode: emit error JSON to stderr
 
-### 10.8 — Canonical Exit Codes (§9.8, SFRS §4)
+### 10.8 — Canonical Exit Codes (§9.8, the CLI Standard §4)
 
 - [x] `0` — Success
 - [x] `1` — General failure
@@ -346,7 +346,7 @@ References in `(§N.N)` point to the matching PRD section. **SFRS** = `spacecraf
 - [x] Single `ExitCode` enum; every subcommand returns it
 - [x] Document tool-specific codes (6–125) in `dns schema` output
 
-### 10.9 — Self-Documentation (SFRS §2 Rule 4)
+### 10.9 — Self-Documentation (the CLI Standard §2 Rule 4)
 
 - [x] `dns schema` emits JSON Schema Draft 2020-12 covering every subcommand, every flag, every output type
 - [~] Default output format for `dns schema` is Anthropic-format JSON Schema (drops directly into Claude function-calling)
@@ -509,7 +509,7 @@ References in `(§N.N)` point to the matching PRD section. **SFRS** = `spacecraf
 
 ---
 
-## 16 — Testing (SFRS §8, Item 10)
+## 16 — Testing (the CLI Standard §8, Item 10)
 
 - [x] Unit tests: provider registry compatibility-matrix enforcement
 - [x] Unit tests: argument parser (positional + flagged, edge cases, control-char rejection)
@@ -523,7 +523,7 @@ References in `(§N.N)` point to the matching PRD section. **SFRS** = `spacecraf
 - [~] Integration: dry-run on current system → no writes
 - [x] Integration: `AI_AGENT=1` invocation → JSON, no-color, no-TUI
 - [~] Integration: cross-shell round-trip — output parseable in POSIX sh + Bash + Nushell + PowerShell + Ion
-- [~] Compliance: every BLOCKER / CRITICAL / MAJOR item from SFRS §9 has a test
+- [~] Compliance: every BLOCKER / CRITICAL / MAJOR item from the CLI Standard §9 has a test
 - [x] `cargo test` passes in CI without external daemons (unit tier)
 
 ---
@@ -557,10 +557,10 @@ Before tagging v0.1.0 release, verify every row of the PRD §15 audit table pass
 - [~] STD §11 — WCAG 2.1 AA contrast
 - [x] STD §12 — UTC `Z` mandatory; metric units; `jiff`/`chrono` only
 - [x] STD §13 — Attribution in --help / --version / README / About
-- [x] SFRS §1 — Non-negotiables (UTF-8 no-BOM, POSIX-parseable, --json universal, stdout-data-only)
-- [x] SFRS §4 — Canonical exit codes
-- [x] SFRS §5 — Output-mode cascade
-- [x] SFRS §6 — JSON envelope `{metadata, data}`
+- [x] the CLI Standard §1 — Non-negotiables (UTF-8 no-BOM, POSIX-parseable, --json universal, stdout-data-only)
+- [x] the CLI Standard §4 — Canonical exit codes
+- [x] the CLI Standard §5 — Output-mode cascade
+- [x] the CLI Standard §6 — JSON envelope `{metadata, data}`
 - [x] ACS §2 — AGENTS.md / CLAUDE.md / SKILL.md / CONTRIBUTING.md present
 - [x] ACS §3 — Tips-thinking hints (runnable commands)
 - [~] ACS §6 — MCP lazy schema loading
