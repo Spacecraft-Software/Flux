@@ -29,6 +29,23 @@ pub fn trim_value(value: Value, fields: &[String]) -> Value {
     Value::Object(result)
 }
 
+/// Trim a data payload to the requested field paths.
+///
+/// Behaves like [`trim_value`], except that an array payload (such as a
+/// provider list) has each element trimmed individually, so `--fields` selects
+/// columns on list output as well as on single objects.
+pub fn trim_payload(value: Value, fields: &[String]) -> Value {
+    if fields.is_empty() {
+        return value;
+    }
+    match value {
+        Value::Array(items) => {
+            Value::Array(items.into_iter().map(|v| trim_value(v, fields)).collect())
+        }
+        other => trim_value(other, fields),
+    }
+}
+
 fn get_nested(value: &Value, path: &[&str]) -> Option<Value> {
     match path.split_first() {
         None => Some(value.clone()),
@@ -166,6 +183,37 @@ mod tests {
         let value = Value::String("just a string".into());
         let trimmed = trim_value(value.clone(), &["slug".to_string()]);
         assert_eq!(trimmed, value);
+    }
+
+    #[test]
+    fn test_trim_payload_applies_to_each_array_element() {
+        let value = Value::Array(vec![
+            obj(&[
+                ("slug", Value::String("google".into())),
+                ("name", Value::String("Google".into())),
+            ]),
+            obj(&[
+                ("slug", Value::String("quad9".into())),
+                ("name", Value::String("Quad9".into())),
+            ]),
+        ]);
+        let trimmed = trim_payload(value, &["slug".to_string()]);
+        let expected = Value::Array(vec![
+            obj(&[("slug", Value::String("google".into()))]),
+            obj(&[("slug", Value::String("quad9".into()))]),
+        ]);
+        assert_eq!(trimmed, expected);
+    }
+
+    #[test]
+    fn test_trim_payload_object_matches_trim_value() {
+        let value = obj(&[
+            ("slug", Value::String("google".into())),
+            ("name", Value::String("Google".into())),
+        ]);
+        let trimmed = trim_payload(value, &["slug".to_string()]);
+        let expected = obj(&[("slug", Value::String("google".into()))]);
+        assert_eq!(trimmed, expected);
     }
 
     #[test]

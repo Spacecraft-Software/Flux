@@ -53,7 +53,7 @@ A Spacecraft Software
 **FLUX** is a DNS selector and network configurator built under the Spacecraft Software project umbrella. This PRD governs the design, scope, and engineering requirements for Flux v0.1.0 (MVP). All requirements herein comply with:
 
 - **The Spacecraft Software Standard v1.2** (2026-05-11) — the master engineering standard.
-- **Spacecraft Software Dual-Mode Self-Documenting CLI Framework (SFRS v1.0.0)** — structural CLI rules.
+- **Spacecraft Software Dual-Mode Self-Documenting CLI Standard (v1.0.0)** — structural CLI rules.
 - **Spacecraft Software Agentic CLI Standard v1.0.0** — agent-facing UX layer.
 - **Spacecraft Software Document Format** — ODF/MS Office authoring rules with mandatory GFM Markdown companion.
 
@@ -111,7 +111,7 @@ Flux is structured as a layered system with clean separation between user interf
 | Layer | Responsibility | MVP Scope |
 |-------|----------------|-----------|
 | Interface Layer | TUI (primary), CLI (dual-mode), GUI (future) | TUI + CLI |
-| Agent Surface | JSON envelope, schema/describe, tips-thinking errors, MCP server | Full SFRS |
+| Agent Surface | JSON envelope, schema/describe, tips-thinking errors, MCP server | Full CLI Standard |
 | Orchestration Layer | Provider registry, protocol negotiation, backup/restore, NTP, VPN | Full |
 | Detection Engine | Probe active DNS/NTP subsystem; deterministic backend selection | Full |
 | Backend Adapters | Write configs for resolved, nmcli, resolv.conf, NixOS, BSDs | Linux + BSD |
@@ -133,9 +133,9 @@ Flux is structured as a layered system with clean separation between user interf
 ### 4.1 — In Scope
 
 - TUI interface with full Spacecraft Software v1.2 theming (Void Navy background, six-token palette, Share Tech Mono + Inconsolata, Vim + CUA keybindings).
-- CLI binary `dns` with POSIX-compliant flag grammar, positional shorthand, full SFRS §3 global flags, `--json`, `--format`, `--fields`, and structured errors.
-- `dns schema` and `dns describe` subcommands for self-documentation (SFRS §2 Rule 4).
-- `dns mcp` — lazy-loading MCP server surface (SFRS §2 Rule 8).
+- CLI binary `dns` with POSIX-compliant flag grammar, positional shorthand, full CLI-Standard §3 global flags, `--json`, `--format`, `--fields`, and structured errors.
+- `dns schema` and `dns describe` subcommands for self-documentation (the CLI Standard §2 Rule 4).
+- `dns mcp` — lazy-loading MCP server surface (the CLI Standard §2 Rule 8).
 - Five DNS providers: Google, Cloudflare, AdGuard, Quad9, OpenDNS. Six protocol families: Plain, DoT, DoH, DoQ, DNSCrypt, WARP.
 - Linux: Arch, Debian/Ubuntu, Fedora, openSUSE, NixOS.
 - BSDs (priority): FreeBSD, OpenBSD, NetBSD.
@@ -337,7 +337,7 @@ Windows 10 (Build 19628+) / 11 with native DoH; PowerShell + netsh backend. macO
 
 ## 9 — CLI Interface Specification
 
-The Flux CLI is a Dual-Mode Self-Documenting CLI per the Spacecraft Software SFRS v1.0.0. It serves two co-equal readers: humans in interactive terminals and AI agents paying for tokens. Both modes are tuned independently; neither subsidizes the other.
+The Flux CLI is a Dual-Mode Self-Documenting CLI per the CLI Standard v1.0.0. It serves two co-equal readers: humans in interactive terminals and AI agents paying for tokens. Both modes are tuned independently; neither subsidizes the other.
 
 ### 9.1 — Command Grammar & POSIX Compliance
 
@@ -381,9 +381,9 @@ dns apply --provider cloudflare --tier family --protocol dot
 | `mcp` | Launch the MCP server (stdio transport). | (server) |
 | `update-registry` | Fetch latest provider registry (v0.2+). | sync |
 
-Standard verbs follow SFRS §2 Rule 7: `list`, `get`, `create`, `update`, `delete`, `apply`, `sync`, `describe`, `schema`.
+Standard verbs follow the CLI Standard §2 Rule 7: `list`, `get`, `create`, `update`, `delete`, `apply`, `sync`, `describe`, `schema`.
 
-### 9.3 — Global Flags (SFRS §3)
+### 9.3 — Global Flags (the CLI Standard §3)
 
 Every Spacecraft Software CLI accepts these flags with identical semantics. Divergence is a BLOCKER.
 
@@ -419,7 +419,7 @@ Every Spacecraft Software CLI accepts these flags with identical semantics. Dive
 
 ### 9.5 — Output Mode Detection Cascade
 
-Per SFRS §5, the first matching condition wins:
+Per the CLI Standard §5, the first matching condition wins:
 
 1. **Explicit flag.** `--format <fmt>` or `--json` forces that mode unconditionally.
 2. **Agent env var.** `AI_AGENT=1`, `AGENT=1`, or `CI=true` → JSON mode, no color, no TUI, non-interactive (`--yes` implicit), minimal verbosity.
@@ -478,7 +478,7 @@ Every non-zero exit in machine mode emits a structured error to stderr. The `hin
 
 ### 9.8 — Exit Codes (Canonical Map)
 
-Per SFRS §4. Codes 0–5 are reserved by the canonical map; 6–125 are tool-specific and MUST be enumerated in `dns schema` output.
+Per the CLI Standard §4. Codes 0–5 are reserved by the canonical map; 6–125 are tool-specific and MUST be enumerated in `dns schema` output.
 
 | Code | Meaning | Class | Tips-thinking hint |
 |:----:|---------|-------|--------------------|
@@ -566,7 +566,7 @@ Plus the posture files (§1.3): `README.md`, `NOTICE.md`, `LICENSE`.
 
 ### 10.4 — MCP Surface (dns mcp)
 
-Per SFRS §2 Rule 8, Flux exposes an MCP (Model Context Protocol) server for the agent function-calling surface. The MCP server uses **lazy schema loading** per Agentic CLI Standard §6.
+Per the CLI Standard §2 Rule 8, Flux exposes an MCP (Model Context Protocol) server for the agent function-calling surface. The MCP server uses **lazy schema loading** per Agentic CLI Standard §6.
 
 - **tools/list response:** names + one-line descriptions + capability tags (`read`, `write`, `destructive`). Full schemas are NOT included.
 - **tools/get response:** loaded only when the agent requests a specific tool. Full input/output JSON Schema returned.
@@ -754,10 +754,10 @@ Before tagging any release of Flux, verify each item below. This list is the run
 | §11 | Material Design (GUI: future); WCAG 2.1 AA contrast verified | ✓ |
 | §12 | ISO 8601 UTC with mandatory Z; ISO 8601 durations; metric units; `jiff`/`chrono` only | ✓ |
 | §13 | Maintainer name, email, project URL in `--help` / `--version` / README | ✓ |
-| SFRS §1 | Non-negotiables: UTF-8 no-BOM, POSIX output, `--json`, stdout-data-only | ✓ |
-| SFRS §4 | Canonical exit codes (§9.8) | ✓ |
-| SFRS §5 | Output mode detection cascade (§9.5) | ✓ |
-| SFRS §6 | JSON envelope `{ metadata, data }` (§9.6) | ✓ |
+| CLI Standard §1 | Non-negotiables: UTF-8 no-BOM, POSIX output, `--json`, stdout-data-only | ✓ |
+| CLI Standard §4 | Canonical exit codes (§9.8) | ✓ |
+| CLI Standard §5 | Output mode detection cascade (§9.5) | ✓ |
+| CLI Standard §6 | JSON envelope `{ metadata, data }` (§9.6) | ✓ |
 | Agentic §2 | `AGENTS.md` / `CLAUDE.md` / `SKILL.md` / `CONTRIBUTING.md` | ✓ |
 | Agentic §3 | Tips-thinking error hints | ✓ |
 | Agentic §6 | MCP lazy schema loading | ✓ |
@@ -770,7 +770,7 @@ Before tagging any release of Flux, verify each item below. This list is the run
 | Reference | Description |
 |-----------|-------------|
 | The Spacecraft Software Standard v1.2 (2026-05-11) | Master engineering standard. Governs all sections. |
-| Spacecraft Software SFRS v1.0.0 (2026-04-10) | Dual-Mode Self-Documenting CLI Framework. |
+| Spacecraft Software Dual-Mode Self-Documenting CLI Standard (v1.0.0) (2026-04-10) | Structural CLI rules. |
 | Spacecraft Software Agentic CLI Standard v1.0.0 (2026-04-10) | Agent-facing UX layer. |
 | Spacecraft Software Document Format | ODF/MS Office authoring with GFM Markdown companion. |
 | IEEE Std 1003.1 (POSIX) | CLI utility conventions. |
